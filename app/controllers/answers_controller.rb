@@ -1,5 +1,6 @@
 class AnswersController < ApplicationController
   def create
+
     Answer.create(answers_params)
     redirect_to questions_path(params[:question_id])
   end
