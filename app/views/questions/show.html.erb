@@ -1,9 +1,52 @@
-タイトル：<%=question.title %><br>
-質問内容：<%=question.content %><br>
-投稿者名：<%=question.name%>
+<div class = "show-main">
+  <div class = "show-contents">
+    <%# 質問内容の表示%>
+    <div class="show-question">
+      <div class = "question-question__title">
+        <%= question.question_title %>
+      </div>
+      <div class="show-question__content">
+        <%=question.content %>
+      </div>
+      <div class="show-question__name">
+        <%=question.name%>
+      </div>
+    </div>
+  </div>
 
-<%= form_with(model: [@question, @answer], local: true) do |form| %><br>
-  <%= form.text_area :content, placeholder: "回答する" %><br>
-  <%= form.text_field :name, placeholder: "投稿者名" %><br>
-  <%= form.submit "POST" %><br>
-<% end %>
+  <%# 回答投稿フォームの表示　　%>
+  <div class="show-answer form">
+    <%= form_with(model: [@question, @answer], local: true) do |form| %>
+      <div class="show-answer-form__heading">
+        回答する
+      </div>
+      <div class="show-answer-form__body">
+        <%= form.text_area :content, placeholder: "回答する",row:"4" %>
+      </div>
+      <div class="show-answer-form__name">
+        <%= form.text_field :name, placeholder: "投稿者名" %>
+      </div>
+      <div class="show-answer-form__submit">
+        <%= form.submit "POST" %>
+      </div>
+      <%end%>
+    </div>
+
+  <%# 回答一覧の表示　%>
+    <div class="show-answer">
+      <div class="show-answer-form__heading">
+        いままでの回答:
+      </div>
+      <% @answers.each do |answer| %>
+        <div class="answer_content">
+          <div class="answer_content__text">
+            <%= answer.content %>
+          </div>
+          <div class="answer_content__name">
+            <%= answer.name%>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
